@@ -14,7 +14,7 @@ var promptFight = window.prompt("would you like to FIGHT or SKIP this battle? En
 
 
 //Variables log check pre fight.
-console.log(playerName, playerHealth, playerAttack);
+console.log(playerName, playerHealth, playerAttack, playerMoney);
 console.log(enemyName, enemyHealth, enemyAttack);
 
 //Fight function 
@@ -71,3 +71,5 @@ if (promptFight === "fight" || promptFight === "FIGHT") {
   window.alert("you need to choose a valid option. Try again!")
 }
 
+//Variables log check if skipped
+console.log(playerName, playerHealth, playerAttack, playerMoney);

@@ -91,18 +91,33 @@ var fightOrSkip = function() {
 };
 
 
+
+/* FIGHT FUNCTION */
+
+
 //for Loop fight function to fight multiple robots
-//Fight function
-var fight = function (enemy) {
+var fight = function(enemy) {
+
+  // keep track of who goes first
+  var isPlayerTurn = true;
+
+  // randomly change turn order
+  if (Math.random() > 0.5) {
+    isPlayerTurn = false;
+  }
+
   while (playerInfo.health > 0 && enemy.health > 0) {
+    if (isPlayerTurn) {
     // ask player if they'd like to fight or skip using fightOrSkip function
     if (fightOrSkip()) {
       // if true, leave fight by breaking loop
       break;
     }
 
-    // remove enemy's health by subtracting the amount we set in the damage variable
+    // random (min max) player damage generated
     var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+
+    // remove enemy's health by subtracting the amount we set in the damage variable
     enemy.health = Math.max(0, enemy.health - damage);
     console.log(
       playerInfo.name +
@@ -122,24 +137,17 @@ var fight = function (enemy) {
       // award player money for winning
       playerInfo.money = playerInfo.money + 20;
 
-      // ask if player wants to use the store before next round
-      var storeConfirm = window.confirm(
-        "The fight is over, visit the store before the next round?"
-      );
-
-      // if yes, take them to the store() function
-      if (storeConfirm) {
-        shop();
-      }
-
       // leave while() loop since enemy is dead
       break;
     } else {
       window.alert(enemy.name + " still has " + enemy.health + " health left.");
     }
 
+      // player gets attacked first
+    } else {
+      var damage = randomNumber(enemy.attack - 3, enemy.attack);
+
     // remove player's health by subtracting the amount we set in the damage variable
-    var damage = randomNumber(enemy.attack - 3, enemy.attack);
     playerInfo.health = Math.max(0, playerInfo.health - damage);
     console.log(
       enemy.name +
@@ -161,7 +169,10 @@ var fight = function (enemy) {
       window.alert(
         playerInfo.name + " still has " + playerInfo.health + " health left."
       );
+      }
     }
+    // switch turn order for next round
+    isPlayerTurn = !isPlayerTurn;
   }
 };
 

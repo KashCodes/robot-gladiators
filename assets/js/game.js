@@ -97,7 +97,7 @@ var fightOrSkip = function() {
 
 //for Loop fight function to fight multiple robots
 var fight = function(enemy) {
-
+debugger
   // keep track of who goes first
   var isPlayerTurn = true;
 
